@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SNAKE ROYALE ULTRA - BUY NOW | By Letshela Mahlakola</title>
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;color:white;text-align:center;padding:0;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;background:#05010f;position:relative}
+#bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 20% 0%,#4b0082 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,#ff0080 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,#0f0c29 0%,#05010f 100%)}
+#stars{position:fixed;inset:0;z-index:-1}
+.topBar{width:370px;max-width:95vw;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);backdrop-filter:blur(15px);padding:9px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.2);margin-top:10px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.topBar b{font-size:13px}
+.hero{width:370px;max-width:95vw;margin:10px 0 6px;background:linear-gradient(135deg,rgba(255,204,0,.18),rgba(255,0,204,.18));border:1px solid rgba(255,204,0,.5);border-radius:20px;padding:12px;text-align:left;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;right:-20px;top:-20px;width:110px;height:110px;background:radial-gradient(circle,#ffcc00,transparent 70%);opacity:.5;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.3);opacity:.9}}
+.hero h2{margin:0;font-size:18px}
+.hero p{margin:4px 0 0;font-size:12px;color:#ddd}
+.hero button{margin-top:8px}
+h1{font-size:42px;margin:4px 0 0;line-height:1;background:linear-gradient(90deg,#ffcc00,#00ff88,#00d4ff,#ff00cc,#ffcc00);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 3s linear infinite;letter-spacing:-1px}
+@keyframes shine{to{background-position:200% center}}
+.sub{color:#bbb;font-size:12px;margin:2px 0 8px}
+.stats{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.card{background:rgba(255,255,255,.09);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18);padding:8px 11px;border-radius:16px;min-width:82px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.card small{color:#aaa;font-size:9px;letter-spacing:1px}
+.card b{font-size:18px;display:block}
+.card.gold{background:linear-gradient(135deg,#ffcc00,#ff8800,#ff00cc);color:#fff;border:none;box-shadow:0 8px 25px rgba(255,204,0,.5)}
+.powers{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0;font-size:11px}
+.pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:999px}
+.pill.on{background:#00ff88;color:#000;font-weight:900;box-shadow:0 0 15px #00ff88}
+.bar{width:370px;max-width:95vw;background:rgba(255,255,255,.12);height:14px;border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.barFill{height:100%;background:linear-gradient(90deg,#00ff88,#ffcc00,#ff00cc,#00d4ff);background-size:200% auto;animation:shine 2s linear infinite;width:0%;transition:.3s;box-shadow:0 0 15px #00ff88}
+.barText{font-size:11px;color:#ddd;margin:4px 0 6px}
+#wrap{position:relative;border-radius:26px;padding:10px;background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 50px rgba(255,0,204,.25)}
+canvas{border-radius:18px;display:block;background:#070114}
+button{border:none;cursor:pointer;border-radius:999px;padding:11px 16px;font-weight:800;font-size:13px;color:white;transition:.15s}
+button:active{transform:scale(.96)}
+.play{background:linear-gradient(90deg,#00ff88,#00d4ff);color:#000;box-shadow:0 8px 25px rgba(0,255,136,.5)}
+.goldBtn{background:linear-gradient(90deg,#ffcc00,#ff8800);color:#000;box-shadow:0 8px 25px rgba(255,204,0,.5)}
+.purpleBtn{background:linear-gradient(90deg,#7b2fff,#ff00cc)}
+.greyBtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3)}
+.greyBtn.active{border:2px solid #ffcc00;background:rgba(255,204,0,.2)}
+.missions{background:rgba(255,255,255,.07);backdrop-filter:blur(10px);border-radius:16px;padding:9px 12px;width:370px;max-width:95vw;margin:8px 0;text-align:left;font-size:12px;border:1px solid rgba(255,255,255,.15)}
+.missions b{color:#00ff88}
+.dpad{display:grid;grid-template-columns:repeat(3,58px);gap:6px;margin-top:10px}
+.dpad button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);font-size:19px;padding:11px 0;backdrop-filter:blur(10px)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:99;align-items:center;justify-content:center;padding:12px}
+.modalBox{background:linear-gradient(180deg,#2a0a4a,#12002b);border:2px solid #ffcc00;border-radius:22px;padding:16px;width:370px;max-width:95vw;text-align:center;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(255,204,0,.3)}
+.shopItem{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);padding:11px;border-radius:14px;margin:7px 0;text-align:left}
+#gameOver,#levelUp,#winScreen,#bossScreen{display:none;position:absolute;inset:10px;border-radius:18px;background:rgba(0,0,0,.9);backdrop-filter:blur(8px);flex-direction:column;align-items:center;justify-content:center;padding:12px}
+.toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#ffcc00,#ff8800);color:#000;padding:11px 18px;border-radius:999px;font-weight:900;display:none;z-index:200;box-shadow:0 10px 30px rgba(0,0,0,.5);font-size:13px}
+.footer{color:#888;font-size:11px;margin:10px 0 16px;line-height:1.5}
+</style>
+</head>
+<body>
+<div id="bg"></div><canvas id="stars" width="400" height="800"></canvas>
+<div class="toast" id="toast"></div>
+
+<div class="topBar"><span>💰 <b id="coins">500</b></span><span>💎 <b id="gems">20</b></span><span>🔥 <b id="streak">1</b></span><span>👑 <b id="prestige">0</b></span></div>
+
+<div class="hero">
+<h2>🔥 SNAKE ROYALE ULTRA</h2>
+<p>⭐ 5.0 • 1M+ Downloads • #1 Most Addictive Game in SA 🇿🇦<br>Play free. Or go PREMIUM and earn 2X coins forever.</p>
+<button class="goldBtn" onclick="openPass()">👑 BUY NOW - R49.99 - PLAY ALL DAY</button>
+</div>
+
+<h1>SNAKE ROYALE</h1>
+<p class="sub">ULTRA GRAPHICS • By Letshela Mahlakola • Centurion, South Africa</p>
+
+<div class="stats">
+<div class="card"><small>SCORE</small><b id="score">0</b></div>
+<div class="card"><small>STAGE</small><b id="stage">1 / 100</b></div>
+<div class="card"><small>COMBO</small><b id="combo">x1</b></div>
+<div class="card gold"><small>GOAL</small><b>100K 👑</b></div>
+</div>
+
+<div class="powers">
+<span class="pill" id="pShield">🛡️ Shield OFF</span>
+<span class="pill" id="pMagnet">🧲 Magnet OFF</span>
+<span class="pill" id="pGhost">👻 Ghost OFF</span>
+<span class="pill" id="pSlow">🐢 Slow OFF</span>
+</div>
+
+<div class="bar"><div class="barFill" id="progress"></div></div>
+<div class="barText" id="progressText">0 / 100,000</div>
+
+<div class="missions"><b>🎯 MISSIONS - Free Gems</b><div id="missionList"></div></div>
+
+<div id="wrap">
+<canvas id="game" width="360" height="360"></canvas>
+<div id="levelUp"><h2 style="color:#00ff88;margin:0;font-size:30px">🎉 STAGE UP!</h2><p id="levelUpText"></p><button class="play" onclick="closeLevelUp()">CONTINUE ▶</button></div>
+<div id="bossScreen"><h2 style="color:#ff2d55;margin:0;font-size:30px">👹 BOSS STAGE!</h2><p>Obstacles are MOVING! Survive = +2000 🪙</p><button class="play" onclick="closeBoss()">FIGHT! ⚔️</button></div>
+<div id="gameOver"><h2 style="margin:0;font-size:28px">💀 GAME OVER</h2><p id="finalScore"></p><p id="finalStage"></p><p style="color:#ffcc00">💰 Earned <b id="earnedCoins">0</b> coins!</p><button class="play" onclick="startGame()">↻ PLAY AGAIN - ONE MORE!</button><button class="goldBtn" onclick="openShop()" style="margin-top:8px">🏪 SPEND COINS</button></div>
+<div id="winScreen"><h2 style="color:#ffcc00;margin:0">👑 YOU ARE ROYALE!</h2><p>100K! Prestige <span id="newPrestige">1</span> Unlocked! 2X Coins FOREVER!</p><button class="play" onclick="doPrestige()">CLAIM PRESTIGE 👑</button></div>
+</div>
+
+<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center">
+<button class="play" onclick="startGame()">▶ PLAY</button>
+<button class="goldBtn" onclick="openShop()">🏪 SHOP</button>
+<button class="purpleBtn" onclick="openPass()">👑 PASS</button>
+<button class="greyBtn" onclick="toggleSound()">🎵 <span id="soundLabel">ON</span></button>
+<button class="greyBtn" onclick="toggleMusic()">🎶 Music: <span id="musicLabel">OFF</span></button>
+</div>
+
+<div style="display:flex;gap:7px;margin-top:8px;flex-wrap:wrap;justify-content:center">
+<button class="greyBtn active" id="skin-neon" onclick="buySkin('neon',0)">🟢 Neon</button>
+<button class="greyBtn" id="skin-fire" onclick="buySkin('fire',0)">🔥 Fire</button>
+<button class="greyBtn" id="skin-ice" onclick="buySkin('ice',0)">🧊 Ice</button>
+<button class="greyBtn" id="skin-gold" onclick="buySkin('gold',500)">👑 Gold 500🪙</button>
+<button class="greyBtn" id="skin-diamond" onclick="buySkin('diamond',1500)">💎 Diamond 1500🪙</button>
+<button class="greyBtn" id="skin-rainbow" onclick="buySkin('rainbow',800)">🌈 Rainbow 800🪙</button>
+</div>
+
+<div class="dpad"><div></div><button onclick="changeDir(0,-1)">⬆️</button><div></div><button onclick="changeDir(-1,0)">⬅️</button><button onclick="changeDir(0,1)">⬇️</button><button onclick="changeDir(1,0)">➡️</button></div>
+
+<div class="modal" id="shopModal"><div class="modalBox"><h2 style="color:#ffcc00;margin:0">🏪 ROYALE SHOP</h2><p style="color:#aaa;font-size:12px">Your coins. Your flex.</p>
+<div class="shopItem"><div><b>👑 Golden God</b><br><small>Gold + 2x coins</small></div><button class="goldBtn" onclick="buySkin('gold',500)">500 🪙</button></div>
+<div class="shopItem"><div><b>💎 Diamond</b><br><small>Diamond + 3x coins</small></div><button class="goldBtn" onclick="buySkin('diamond',1500)">1500 🪙</button></div>
+<div class="shopItem"><div><b>🌈 Rainbow</b><br><small>Rainbow trail</small></div><button class="goldBtn" onclick="buySkin('rainbow',800)">800 🪙</button></div>
+<div class="shopItem"><div><b>🛡️ Extra Life</b><br><small>Revive once</small></div><button class="goldBtn" onclick="buyLife()">300 🪙</button></div>
+<div class="shopItem"><div><b>💎 100 Gems</b><br><small>Support Letshela</small></div><button class="goldBtn" onclick="buyGems()">R19.99 BUY</button></div>
+<div class="shopItem"><div><b>👑 BATTLE PASS</b><br><small>2X coins + All skins</small></div><button class="goldBtn" onclick="buyPass()">R49.99 BUY</button></div>
+<button class="greyBtn" onclick="closeModals()" style="margin-top:10px">Close</button></div></div>
+
+<div class="modal" id="passModal"><div class="modalBox"><h2 style="color:#ffcc00;margin:0">👑 ROYALE PASS</h2><p>Free = 1x coins. Premium = 2x coins + All skins + Exclusive 👑 Badge + No Ads.</p><div style="background:rgba(255,255,255,.08);padding:12px;border-radius:12px;text-align:left;font-size:13px;line-height:1.7">✅ FREE: Play, Coins, Missions<br>👑 PREMIUM R49.99: 2X Coins Forever, Gold + Diamond + Rainbow, VIP Badge</div><button class="goldBtn" onclick="buyPass()" style="margin-top:12px;width:100%;padding:15px;font-size:15px">👑 BUY NOW - R49.99 - PLAY ALL DAY</button><button class="greyBtn" onclick="closeModals()" style="margin-top:8px">Maybe Later</button></div></div>
+
+<div class="modal" id="dailyModal"><div class="modalBox"><h2>🎁 DAILY REWARD!</h2><p>Welcome back, Legend!</p><h1 style="font-size:30px">+1000 🪙 +10 💎</h1><p>Day <b id="dailyDay">1</b> Streak!</p><button class="goldBtn" onclick="closeModals()" style="width:100%">CLAIM & PLAY ▶</button></div></div>
+
+<p class="footer">⭐⭐⭐⭐⭐ "Most addictive game I've ever played!" - 1M+ players<br>Made with 💚 by Letshela Mahlakola • Centurion, Gauteng, South Africa<br>DOWNLOAD NOW • BUY NOW • PLAY ALL DAY</p>
+
+<script>
+// STARS BACKGROUND
+const starCanvas=document.getElementById("stars"), sctx=starCanvas.getContext("2d"); let stars=[]; for(let i=0;i<90;i++) stars.push({x:Math.random()*400,y:Math.random()*800,r:Math.random()*1.8+0.3,s:Math.random()*0.6+0.2}); function drawStars(){ sctx.clearRect(0,0,400,800); stars.forEach(s=>{ s.y+=s.s; if(s.y>800) s.y=0; sctx.fillStyle="rgba(255,255,255,"+(0.3+Math.random()*0.5)+")"; sctx.beginPath(); sctx.arc(s.x,s.y,s.r,0,Math.PI*2); sctx.fill(); }); requestAnimationFrame(drawStars); } drawStars();
+const canvas=document.getElementById("game"), ctx=canvas.getContext("2d");
+let snake, food, bonusFood, obstacles, powerUp, particles=[], floatTexts=[], dx, dy, score, stage, foodsEaten, speed=105, loop, bonusTimer, powerTimer, combo=1, comboTimer, shake=0, soundOn=true, musicOn=false, musicTimer=null, skin='neon', powers={shield:0,magnet:0,ghost:0,slow:0}, isBoss=false, touchX=0, touchY=0, coins=parseInt(localStorage.getItem("royaleCoins")||"500"), gems=parseInt(localStorage.getItem("royaleGems")||"20"), prestige=parseInt(localStorage.getItem("royalePrestige")||"0"), streak=parseInt(localStorage.getItem("royaleStreak")||"1"), owned=JSON.parse(localStorage.getItem("royaleOwned")||'["neon","fire","ice"]'), hasPass=localStorage.getItem("royalePass")==="1", extraLife=parseInt(localStorage.getItem("royaleLife")||"0"), runCoins=0, missions={apples:0,stage5:false,combo3:false}, audioCtx=null, time=0;
+function beep(f,d,t='square',v=0.07){ if(!soundOn) return; try{ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); let o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.type=t; o.frequency.value=f; g.gain.value=v; o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+d);}catch(e){} }
+function toggleMusic(){ musicOn=!musicOn; document.getElementById("musicLabel").innerText=musicOn?"ON":"OFF"; if(musicOn){ let notes=[523,659,784,1046,784,659]; let i=0; musicTimer=setInterval(()=>{ beep(notes[i%notes.length],0.18,'triangle',0.04); i++; },280); } else clearInterval(musicTimer); toast(musicOn?"🎶 Music ON - Vibe mode!":"🎶 Music OFF"); }
+function toast(m){ let t=document.getElementById("toast"); t.innerText=m; t.style.display="block"; setTimeout(()=>t.style.display="none",2000); }
+function save(){ localStorage.setItem("royaleCoins",coins); localStorage.setItem("royaleGems",gems); localStorage.setItem("royalePrestige",prestige); localStorage.setItem("royaleStreak",streak); localStorage.setItem("royaleOwned",JSON.stringify(owned)); localStorage.setItem("royaleLife",extraLife); }
+function toggleSound(){ soundOn=!soundOn; document.getElementById("soundLabel").innerText=soundOn?"ON":"OFF"; }
+function openShop(){ document.getElementById("shopModal").style.display="flex"; beep(900,0.1); }
+function openPass(){ document.getElementById("passModal").style.display="flex"; }
+function closeModals(){ document.querySelectorAll(".modal").forEach(m=>m.style.display="none"); }
+function buyPass(){ hasPass=true; localStorage.setItem("royalePass","1"); coins+=5000; gems+=100; owned=["neon","fire","ice","gold","diamond","rainbow"]; save(); updateTop(); closeModals(); toast("👑 PREMIUM! 2X Coins FOREVER!"); beep(1200,0.3,'sine',0.1); }
+function buyGems(){ gems+=100; save(); updateTop(); toast("💎 +100 Gems! Thank you for supporting Letshela!"); }
+function buyLife(){ if(coins<300) return toast("😢 Not enough coins! Play more!"); coins-=300; extraLife++; save(); updateTop(); toast("🛡️ Extra Life Bought!"); }
+function buySkin(s,price){ if(owned.includes(s)){ setSkin(s); return; } if(coins<price) return toast("😢 Need "+price+" coins! Keep grinding!"); coins-=price; owned.push(s); setSkin(s); save(); updateTop(); toast("🔥 NEW SKIN: "+s.toUpperCase()+"!"); beep(1000,0.2,'sine',0.1); }
+function setSkin(s){ if(!owned.includes(s)) return toast("🔒 Locked! Buy in SHOP!"); skin=s; document.querySelectorAll('.greyBtn').forEach(b=>b.classList.remove('active')); let el=document.getElementById('skin-'+s); if(el) el.classList.add('active'); toast("Skin: "+s.toUpperCase()); }
+function skinColor(i){ if(skin==='fire') return `hsl(${20-i*2},100%,${55-i}%)`; if(skin==='ice') return `hsl(${190+i*3},100%,${60-i}%)`; if(skin==='gold') return `hsl(${45-i},100%,${55-i}%)`; if(skin==='diamond') return `hsl(190,100%,${85-i*2}%)`; if(skin==='rainbow') return `hsl(${(i*25+time*2)%360},100%,60%)`; return `hsl(${130-i*2},100%,${55-i}%)`; }
+function updateTop(){ document.getElementById("coins").innerText=coins.toLocaleString(); document.getElementById("gems").innerText=gems; document.getElementById("streak").innerText=streak; document.getElementById("prestige").innerText=prestige; }
+function updateMissions(){ document.getElementById("missionList").innerHTML=`<div>${missions.apples>=20?'✅':'🎯'} Eat 20 apples: ${missions.apples}/20 → +5 💎</div><div>${missions.stage5?'✅':'🎯'} Reach Stage 5 → +10 💎</div><div>${missions.combo3?'✅':'🎯'} Combo x3 → +5 💎</div>`; }
+function checkMissions(){ if(missions.apples===20) gems+=5; if(missions.stage5==='todo'){ gems+=10; missions.stage5=true; } if(missions.combo3==='todo'){ gems+=5; missions.combo3=true; } save(); updateTop(); updateMissions(); }
+function startGame(){ document.getElementById("gameOver").style.display="none"; document.getElementById("winScreen").style.display="none"; document.getElementById("levelUp").style.display="none"; document.getElementById("bossScreen").style.display="none"; snake=[{x:180,y:180},{x:160,y:180},{x:140,y:180}]; dx=20; dy=0; score=0; stage=1; foodsEaten=0; combo=1; particles=[]; floatTexts=[]; powers={shield:0,magnet:0,ghost:0,slow:0}; isBoss=false; runCoins=0; missions={apples:0,stage5:false,combo3:false}; generateObstacles(); placeFood(); spawnBonus(); spawnPowerUp(); updateUI(); updateTop(); updateMissions(); clearInterval(loop); loop=setInterval(draw,speed); }
+function generateObstacles(){ obstacles=[]; let c=Math.min(2+stage,24); for(let i=0;i<c;i++){ let x,y,t=0; do{ x=Math.floor(Math.random()*18)*20; y=Math.floor(Math.random()*18)*20; t++; }while(t<50 && (snake.some(p=>p.x===x&&p.y===y)||(Math.abs(x-180)<60&&Math.abs(y-180)<60)||obstacles.some(o=>o.x===x&&o.y===y))); if(t<50) obstacles.push({x,y,vx:0,vy:0}); } if(isBoss) obstacles.forEach(o=>{ o.vx=Math.random()>0.5?20:-20; if(Math.random()>0.5){o.vy=o.vx; o.vx=0;} }); }
+function placeFood(){ let x,y; do{ x=Math.floor(Math.random()*18)*20; y=Math.floor(Math.random()*18)*20; }while(snake.some(p=>p.x===x&&p.y===y)||obstacles.some(o=>o.x===x&&o.y===y)); food={x,y}; }
+function spawnBonus(){ clearTimeout(bonusTimer); let x,y; do{ x=Math.floor(Math.random()*18)*20; y=Math.floor(Math.random()*18)*20; }while(snake.some(p=>p.x===x&&p.y===y)||obstacles.some(o=>o.x===x&&o.y===y)); bonusFood={x,y,visible:true}; bonusTimer=setTimeout(()=>{ bonusFood.visible=false; spawnBonus(); },6000); }
+function spawnPowerUp(){ clearTimeout(powerTimer); let types=['shield','magnet','ghost','slow']; let type=types[Math.floor(Math.random()*types.length)]; let x,y; do{ x=Math.floor(Math.random()*18)*20; y=Math.floor(Math.random()*18)*20; }while(snake.some(p=>p.x===x&&p.y===y)||obstacles.some(o=>o.x===x&&o.y===y)); let em={shield:'🛡️',magnet:'🧲',ghost:'👻',slow:'🐢'}; powerUp={x,y,type,emoji:em[type],visible:true}; powerTimer=setTimeout(()=>{ if(powerUp) powerUp.visible=false; spawnPowerUp(); },7000); }
+function addParticles(x,y,c){ for(let i=0;i<18;i++) particles.push({x:x+10,y:y+10,vx:(Math.random()-0.5)*7,vy:(Math.random()-0.5)*7,life:22,color:c,size:Math.random()*4+2}); }
+function updateUI(){ document.getElementById("score").innerText=score.toLocaleString(); document.getElementById("stage").innerText=stage+" / 100"; document.getElementById("combo").innerText="x"+combo; let pct=Math.min(100,Math.floor(score/100000*100)); document.getElementById("progress").style.width=pct+"%"; document.getElementById("progressText").innerText=score.toLocaleString()+" / 100,000 • "+pct+"% • 💰 Run: "+runCoins+" 🪙"; document.getElementById("pShield").innerText="🛡️ Shield "+(powers.shield>0?Math.ceil(powers.shield/1000)+"s":"OFF"); document.getElementById("pShield").className="pill "+(powers.shield>0?"on":""); document.getElementById("pMagnet").innerText="🧲 Magnet "+(powers.magnet>0?Math.ceil(powers.magnet/1000)+"s":"OFF"); document.getElementById("pMagnet").className="pill "+(powers.magnet>0?"on":""); document.getElementById("pGhost").innerText="👻 Ghost "+(powers.ghost>0?Math.ceil(powers.ghost/1000)+"s":"OFF"); document.getElementById("pGhost").className="pill "+(powers.ghost>0?"on":""); document.getElementById("pSlow").innerText="🐢 Slow "+(powers.slow>0?Math.ceil(powers.slow/1000)+"s":"OFF"); document.getElementById("pSlow").className="pill "+(powers.slow>0?"on":""); }
+function closeLevelUp(){ document.getElementById("levelUp").style.display="none"; clearInterval(loop); loop=setInterval(draw,Math.max(45,speed-stage*0.6)); }
+function closeBoss(){ document.getElementById("bossScreen").style.display="none"; clearInterval(loop); loop=setInterval(draw,Math.max(45,speed-stage*0.6)); }
+function doPrestige(){ prestige++; coins+=10000; save(); updateTop(); document.getElementById("winScreen").style.display="none"; toast("👑 PRESTIGE "+prestige+"! "+(1+prestige)+"x coins!"); startGame(); }
+function gameOver(){ clearInterval(loop); shake=16; beep(200,0.4,'sawtooth',0.12); if(extraLife>0){ extraLife--; save(); toast("🛡️ EXTRA LIFE! Revived!"); snake=[{x:180,y:180},{x:160,y:180},{x:140,y:180}]; dx=20; dy=0; clearInterval(loop); loop=setInterval(draw,speed); return; } coins+=runCoins; save(); updateTop(); document.getElementById("earnedCoins").innerText=runCoins.toLocaleString(); document.getElementById("finalScore").innerText="Score: "+score.toLocaleString()+" | Total Coins: "+coins.toLocaleString(); document.getElementById("finalStage").innerText="Stage "+stage+" / 100 • "+Math.floor(score/100000*100)+"% to 100K"; document.getElementById("gameOver").style.display="flex"; }
+function draw(){
+  time++; Object.keys(powers).forEach(k=>{ if(powers[k]>0) powers[k]-=speed; });
+  if(powers.magnet>0 && food){ if(food.x<snake[0].x) food.x+=20; if(food.x>snake[0].x) food.x-=20; if(food.y<snake[0].y) food.y+=20; if(food.y>snake[0].y) food.y-=20; }
+  if(isBoss) obstacles.forEach(o=>{ o.x+=o.vx; o.y+=o.vy; if(o.x<0||o.x>=360) o.vx*=-1; if(o.y<0||o.y>=360) o.vy*=-1; o.x=Math.max(0,Math.min(340,o.x)); o.y=Math.max(0,Math.min(340,o.y)); });
+  ctx.save(); if(shake>0){ ctx.translate((Math.random()-0.5)*shake,(Math.random()-0.5)*shake); shake-=2; }
+  // Animated gradient bg inside canvas
+  let grad=ctx.createRadialGradient(180,180,10,180,180,280); grad.addColorStop(0,"#1a0033"); grad.addColorStop(0.5,"#0a0a25"); grad.addColorStop(1,"#05010f"); ctx.fillStyle=grad; ctx.fillRect(-20,-20,400,400);
+  ctx.fillStyle="rgba(255,255,255,0.06)"; for(let i=0;i<18;i++) for(let j=0;j<18;j++) ctx.fillRect(i*20+9,j*20+9,2,2);
+  obstacles.forEach(o=>{ ctx.shadowColor=isBoss?"#ff2d55":"#ff00cc"; ctx.shadowBlur=10; ctx.fillStyle=isBoss?"#5a1a2a":"#2a2a4a"; ctx.fillRect(o.x+1,o.y+1,18,18); ctx.fillStyle=isBoss?"#ff2d55":"#a0a0ff"; ctx.fillRect(o.x+4,o.y+4,12,12); ctx.shadowBlur=0; ctx.fillStyle="white"; ctx.font="bold 11px Arial"; ctx.fillText(isBoss?"👹":"✕",o.x+4,o.y+14); });
+  // Pulsing food
+  let pulse=8+Math.sin(time*0.25)*2; ctx.shadowColor="#ff2d55"; ctx.shadowBlur=25; ctx.fillStyle="#ff2d55"; ctx.beginPath(); ctx.arc(food.x+10,food.y+10,pulse,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; ctx.fillStyle="rgba(255,255,255,.9)"; ctx.beginPath(); ctx.arc(food.x+7,food.y+7,2.5,0,Math.PI*2); ctx.fill();
+  if(bonusFood && bonusFood.visible){ let p2=8+Math.sin(time*0.3)*2; ctx.shadowColor="#ffcc00"; ctx.shadowBlur=28; ctx.fillStyle="#ffcc00"; ctx.beginPath(); ctx.arc(bonusFood.x+10,bonusFood.y+10,p2,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; ctx.fillStyle="black"; ctx.font="bold 11px Arial"; ctx.fillText("★",bonusFood.x+5,bonusFood.y+14); }
+  if(powerUp && powerUp.visible){ ctx.shadowColor="#00d4ff"; ctx.shadowBlur=22; ctx.fillStyle="white"; ctx.beginPath(); ctx.arc(powerUp.x+10,powerUp.y+10,11+Math.sin(time*0.3)*1.5,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; ctx.font="15px Arial"; ctx.fillText(powerUp.emoji,powerUp.x+2,powerUp.y+15); }
+  let head={x:snake[0].x+dx,y:snake[0].y+dy};
+  if(powers.ghost>0){ if(head.x<0) head.x=340; if(head.x>=360) head.x=0; if(head.y<0) head.y=340; if(head.y>=360) head.y=0; }
+  snake.unshift(head); let ate=false;
+  if(head.x===food.x && head.y===food.y){
+    combo=Math.min(5,combo+1); clearTimeout(comboTimer); comboTimer=setTimeout(()=>combo=1,4000);
+    let mult=1+prestige+(hasPass?1:0); let pts=(100+stage*50)*combo; let coinGain=10*combo*mult; score+=pts; runCoins+=coinGain; foodsEaten++; missions.apples++; ate=true; beep(600,0.1); beep(900,0.12); addParticles(food.x,food.y,"#ff2d55"); floatTexts.push({x:food.x,y:food.y-10,text:"+"+pts,life:25,color:"#00ff88"}); toast("+"+pts+" • +"+coinGain+" 🪙 • Combo x"+combo); placeFood();
+    if(combo>=3 && !missions.combo3){ missions.combo3='todo'; checkMissions(); }
+    if(foodsEaten%4===0 && stage<100){ stage++; let bonus=stage*500; score+=bonus; runCoins+=50*mult; if(stage>=5 && !missions.stage5){ missions.stage5='todo'; checkMissions(); } beep(523,0.12); setTimeout(()=>beep(784,0.2),150); if(stage%10===0){ isBoss=true; document.getElementById("bossScreen").style.display="flex"; } else { document.getElementById("levelUpText").innerText="Stage "+stage+"! +"+bonus+" pts +"+(50*mult)+" 🪙!"; document.getElementById("levelUp").style.display="flex"; } clearInterval(loop); generateObstacles(); }
+    if(missions.apples===20) checkMissions();
+  }
+  if(bonusFood && bonusFood.visible && head.x===bonusFood.x && head.y===bonusFood.y){ let pts=(500+stage*200)*combo; let mult=1+prestige+(hasPass?1:0); score+=pts; runCoins+=100*mult; addParticles(bonusFood.x,bonusFood.y,"#ffcc00"); floatTexts.push({x:bonusFood.x,y:bonusFood.y-10,text:"+"+pts+" ⭐",life:25,color:"#ffcc00"}); toast("⭐ BONUS +"+pts+" • +"+(100*mult)+" 🪙!"); bonusFood.visible=false; spawnBonus(); }
+  if(powerUp && powerUp.visible && head.x===powerUp.x && head.y===powerUp.y){ beep(1200,0.15,'sine',0.1); addParticles(powerUp.x,powerUp.y,"#00d4ff"); if(powerUp.type==='shield') powers.shield=6000; if(powerUp.type==='magnet') powers.magnet=6000; if(powerUp.type==='ghost') powers.ghost=6000; if(powerUp.type==='slow'){ powers.slow=5000; clearInterval(loop); loop=setInterval(draw,speed*1.8); setTimeout(()=>{ clearInterval(loop); loop=setInterval(draw,Math.max(45,speed-stage*0.6)); },5000); } toast(powerUp.emoji+" "+powerUp.type.toUpperCase()+" ACTIVATED!"); powerUp.visible=false; spawnPowerUp(); }
+  if(!ate) snake.pop();
+  if(score>=100000){ clearInterval(loop); document.getElementById("newPrestige").innerText=prestige+1; document.getElementById("winScreen").style.display="flex"; ctx.restore(); return; }
+  let hitObs=obstacles.some(o=>o.x===head.x&&o.y===head.y);
+  if(hitObs && powers.shield>0){ obstacles=obstacles.filter(o=>!(o.x===head.x&&o.y===head.y)); addParticles(head.x,head.y,"#00ff88"); shake=12; toast("🛡️ SHIELD SMASH!"); hitObs=false; }
+  if(head.x<0||head.x>=360||head.y<0||head.y>=360||snake.slice(1).some(p=>p.x===head.x&&p.y===head.y)||hitObs){ gameOver(); ctx.restore(); return; }
+  particles=particles.filter(p=>p.life>0); particles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.life--; ctx.globalAlpha=p.life/22; ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); }); ctx.globalAlpha=1;
+  floatTexts=floatTexts.filter(t=>t.life>0); floatTexts.forEach(t=>{ t.y-=1; t.life--; ctx.globalAlpha=t.life/25; ctx.fillStyle=t.color; ctx.font="bold 13px Arial"; ctx.fillText(t.text,t.x,t.y); }); ctx.globalAlpha=1;
+  updateUI();
+  // Glow trail + round snake
+  snake.forEach((part,i)=>{ ctx.shadowColor=skinColor(i); ctx.shadowBlur=15; ctx.fillStyle=skinColor(i); ctx.beginPath(); ctx.arc(part.x+10,part.y+10,i===0?10:9,0,Math.PI*2); ctx.fill(); });
+  ctx.shadowBlur=0;
+  // Eyes that look in direction
+  let hx=snake[0].x+10, hy=snake[0].y+10, ex=dx/20*3, ey=dy/20*3;
+  ctx.fillStyle="white"; ctx.beginPath(); ctx.arc(hx-4+ex,hy-4+ey,3.2,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(hx+4+ex,hy-4+ey,3.2,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle="black"; ctx.beginPath(); ctx.arc(hx-4+ex*1.5,hy-4+ey*1.5,1.6,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(hx+4+ex*1.5,hy-4+ey*1.5,1.6,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+function changeDir(x,y){ if(x===-1&&dx===20) return; if(x===1&&dx===-20) return; if(y===-1&&dy===20) return; if(y===1&&dy===-20) return; dx=x*20; dy=y*20; }
+document.addEventListener("keydown",e=>{ if(e.key==="ArrowUp") changeDir(0,-1); if(e.key==="ArrowDown") changeDir(0,1); if(e.key==="ArrowLeft") changeDir(-1,0); if(e.key==="ArrowRight") changeDir(1,0); });
+canvas.addEventListener("touchstart",e=>{ touchX=e.touches[0].clientX; touchY=e.touches[0].clientY; });
+canvas.addEventListener("touchend",e=>{ let dx2=e.changedTouches[0].clientX-touchX, dy2=e.changedTouches[0].clientY-touchY; if(Math.abs(dx2)>Math.abs(dy2)) changeDir(dx2>0?1:-1,0); else changeDir(0,dy2>0?1:-1); });
+let lastDay=localStorage.getItem("royaleLastDay"); let today=new Date().toDateString(); if(lastDay!==today){ localStorage.setItem("royaleLastDay",today); if(lastDay) streak++; coins+=1000; gems+=10; save(); document.getElementById("dailyDay").innerText=streak; setTimeout(()=>{ document.getElementById("dailyModal").style.display="flex"; },800); }
+updateTop(); updateMissions(); startGame();
+</script>
+</body>
+</html>
